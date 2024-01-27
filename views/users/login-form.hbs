@@ -1,0 +1,71 @@
+<section class="body">
+    <div class="h1-container">
+        <h1>Existing Account</h1>
+    </div>
+    <form action="/login" method="post">
+
+        <div class="input-container">
+            
+            <input type="email" name="email" placeholder="email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            
+        </div>
+        <div class="button-container">
+            <button>Create</button>
+        </div>
+    </form>
+</section>
+
+<style>
+    .body{
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        display: grid;
+        place-items: center;
+        background-color: #ffffeb;
+        font-family: 'poppins',sans-serif;
+    }
+    .h1-container{
+        margin-bottom: -100px;
+    }
+    form{
+        width: 400px;
+        height: 500px;
+        box-shadow: 0 0 10px rgba( 0, 0, 0, 0.3);
+        background-color: #fff;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+    }
+    .input-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+    }
+    .input-container input{
+        padding: 8px 15px;
+        width: 100%;
+        margin: 20px 5px;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+    }
+    .button-container{
+        width: 100%;
+        display: grid;
+        place-items: center;
+    }
+    .button-container button{
+        padding: 10px;
+        width: 90%;
+        border-radius: 20px;
+        background-color: rgb(255, 196, 0);
+        color: white;   
+        border: none;
+        font-size: 16px;
+        font-family: 'Poppins',sans-serif;
+    }
+</style>

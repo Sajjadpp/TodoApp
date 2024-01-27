@@ -1,0 +1,234 @@
+<header class="top-header">
+    <div class="image">
+        <a href="/profile">
+            <img src="images/userProfile/{{user._id}}.jpg" alt="">
+        </a>
+        
+        <h4>{{user.name}}, {{user.Age}}</h4>
+    </div>
+    <div class="notification">
+        <h3><i class="fa-regular fa-bell"></i></h3>
+    </div>
+</header>
+<section class="body">
+    <div class="firstPlan">
+        <h1>Current task</h1>
+        <div class="card">
+            <h3>standup Meeting</h3>
+            <p>today 10:00 - 11:00 AM</p>
+            <button>Mark as completed</button>
+        </div>
+    </div>
+
+    <div class="other-plans">
+        <h1>Your tasks</h1>
+        {{#each task.content}}
+            <div class="card">
+                <div class="flex">
+                    <h3>{{this.task}}</h3>
+                    <a class="confirmButton" href="/deleteTask/{{this.id}}" onclick="return confirm('are you sure to remove this ')">completed</a>
+                </div>
+                <h6>In progress</h6>
+                <hr>
+                <p id="{{this.id}}" onclick="timeLeft('{{this.date}}','{{this.id}}')">click here to see Time Left</p>
+                
+            </div>
+        {{/each}}
+        
+    </div>
+</section>
+<footer>
+    <div class="footer-container">
+        <i class="fa-solid fa-house"></i>
+        <span><a href="/addList"><i class="fa-solid fa-plus"></i></a></span>
+        <i class="fa-solid fa-gear"></i>
+    </div>
+</footer>
+
+<style>
+    .flex{
+        display: flex;
+    }
+    .flex h3{
+        width: 95%;
+        
+    }
+    a{
+        color: rgb(255, 252, 209);
+    }
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppinis",sans-serif;
+
+    }
+    .top-header{
+        padding: 0 20px;
+        display: flex;
+        height: 65px;
+        background-color: #ffffeb;
+    }
+    .top-header div{
+        width: 50%;
+        display: flex;
+        align-items: center;
+    }
+    .top-header img{
+        width: 50px;
+        height: 50px;
+        background-color: rgb(255, 196, 0);
+        border-radius: 50px;
+        margin: 0 10px;
+        border: none;
+        background-image: url('images/bg/userbg.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .notification{
+        justify-content: end;
+        
+    }
+    .body{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 0 40px;
+        background-color: #ffffeb;
+        padding-bottom: 60px;
+    }
+    .firstPlan{
+        padding: 35px 0;
+        color: rgb(51, 47, 47);
+
+    }
+    .firstPlan .card{
+        width: 100%;
+        height: 150px;
+        border-radius: 20px;
+        box-shadow: 4px 4px 10px #bebebe;
+        padding: 20px;
+        margin-top: 20px;
+        color: rgb(51, 47, 47);
+        background: url(images/bg/cardbg.avif),#Fff;
+        background-repeat: no-repeat;
+        background-position: 90% 100%;
+        background-size: 50%;
+
+    }
+    .firstPlan .card p{
+        color: grey;
+        font-size: small;
+        margin: 3px 0;
+        cursor: pointer;
+    }
+    .firstPlan .card button{
+        color: #fff;
+        padding: 7px 20px;
+        border-radius: 30px;
+        margin-top: 20px;
+        background-color: rgb(255, 196, 0);
+        border: none;
+        box-shadow:  0 0 2px rgba( 0, 0, 0, 0.3);
+    }
+    .other-plans .card{
+        width: 100%;
+        height: 120px;
+        border-radius: 20px;
+        box-shadow: 4px 4px 10px #bebebe;
+        padding: 20px;
+        margin-top: 20px;
+        background-blend-mode: color;
+        color: rgb(51, 47, 47);
+        background-color: #fff;
+    }
+    .other-plans .card h6{
+        color: rgb(255, 196, 0);
+        font-weight: 100;
+        margin: 3px 0;
+        margin-bottom: 8px;
+    }
+    .card h3{
+        font-size: 16.5px;
+        color: rgb(51, 47, 47);
+    }
+    .other-plans .card p{
+        font-size: small;
+        margin-top: 10px;
+        color: grey;
+        cursor: pointer;
+    }
+    footer{
+        height: 60px;
+        padding: 0 20px;
+        background-color: rgb(51, 47, 47);
+        position: sticky;
+        bottom: 0;
+    }
+    .footer-container{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+        color: rgb(255, 252, 209);
+        font-size: 20px;
+    }
+    .footer-container span{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: rgb(255, 196, 0);
+        display: grid;
+        place-items: center;
+        margin-top: -40px;
+        font-size: 30px;
+    }
+    .confirmButton{
+        padding: 10px;
+        background-color: rgb(255, 196, 0);
+        text-decoration: none;
+        border-radius: 15px;
+        color
+    }
+</style>
+
+<script>
+    function timeLeft(time,id){
+        console.log(time)
+        // Set the date we're counting down to
+var countDownDate = new Date(time).getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  let checkDate = days+':'+hours+':'+ minutes+':'+seconds
+  if(days ===0){
+    let currentTask = true
+  }
+  
+  document.getElementById(id).innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s left ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+    }
+    
+</script>
+

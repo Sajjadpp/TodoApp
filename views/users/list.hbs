@@ -1,0 +1,171 @@
+<section class="body">
+    <div class="backspace">
+        <span><i class="fa-solid fa-xmark"></i></span>
+    </div>
+    <div class="newtask-head">
+        <h1>New task</h1>
+    </div>
+    <form action="/createNewTask" method="post" class="set-timeAndDate">
+        <div class="date">
+            <input class="passive-button active-button" name="day" value="Today" onclick="changeColor('Today')" placeholder="Today" readonly>
+            <input class="passive-button"  value="Tommarow" onclick="changeColor('Tomarrow')" placeholder="Tomarrow" readonly>
+            <input class="passive-button" onclick="change()" type="datetime-local" name="date" required placeholder="set Date">
+        </div>
+        <div class="task">
+            <h6>TITTLE</h6>
+            <div class="input-area">
+                <input type="text" placeholder="Type task here" name="task" required>
+                
+            </div>
+        </div>
+        <div class="time">
+            <div><i class="fa-solid fa-clock-rotate-left"></i><p>alert</p></div>
+            
+            <div><i class="fa-regular fa-bell"></i><p>Notification</p></div>
+            
+        </div>
+        
+        <div class="create">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    let activeButtons = document.getElementsByClassName('active-buttons');
+    let passiveButtons = document.querySelectorAll('.passive-button');
+    
+    let Tommarow = document.getElementById('tomarrow');
+    let today = document.getElementById('today');
+    
+    function changeColor(day) {
+        
+        for(passiveButton of passiveButtons){
+            
+            passiveButton.classList.remove('active-button')
+            passiveButton.removeAttribute('name');
+            passiveButton.removeAttribute('value');
+        }
+        event.currentTarget.classList.add('active-button')
+        event.currentTarget.setAttribute('name','day')
+        event.currentTarget.setAttribute('value',day)
+    }
+    
+    function change(){
+        for(activeButton of activeButtons){
+            activeButtons.removeAttribute('value');
+        }
+        for(passiveButton of passiveButtons){
+            passiveButton.classList.remove('active-button');
+        }   
+        
+    }
+    
+    
+
+</script>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins',sans-serif;
+    }
+    .body{
+        padding: 10px 30px;
+        min-height: 100vh ;
+        background-color: ffffeb;
+    }
+    .backspace{
+        height: 60px;
+        display: flex;
+        align-items: center;        
+    }
+    .backspace span{
+        border-radius: 50%;
+        border: 1px solid rgb(168, 168, 168);
+        font-size: larger;
+        padding: 7px 10px;
+    }
+    .newtask-head{
+        height: 100px;
+        font-size: 30px;
+        padding-top: 20px;
+    }
+    .set-timeAndDate .date{
+        gap: 10px;
+        display: flex;
+    }
+    .passive-button{
+        padding: 15px;
+        border-radius: 30px;
+        background-color: white;
+        font-family: sans-serif;
+        border: 1px solid;
+        color: black;
+        max-width: 100px;
+        cursor: pointer;
+    }
+    .active-button{
+        padding: 15px;
+        border-radius: 30px;
+        color: white;
+        background-color: black;
+        font-family: sans-serif;
+    }
+    .time div{
+        background-color: white;
+        font-size: 20px;
+        padding: 10px;
+        margin: 0 10px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+    }
+    .time div p{
+        font-size: 14px;
+        margin-top: 2px;
+    }
+    .time{
+        padding: 30px 0;
+        display: flex;
+    }
+    .task h6{
+        color: grey;
+        margin: 10px 0;
+        
+    }
+    
+    .input-area{
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        
+    }
+    .input-area input{
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 35px;
+    }
+    .create{
+        bottom: 0;
+        width: 100%;
+        padding: 30px;
+        margin-top: 10px;
+    }
+    .create button{
+        width: 100%;
+        padding: 15px;
+        border-radius: 30px;
+        color: white;
+        background-color: rgb(225,196,0);
+        border: none;
+        cursor: pointer;
+    }
+    @media(min-width:600px){
+        .body{
+            padding: 10px 100px;
+        }
+    }
+</style>
